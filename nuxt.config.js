@@ -29,7 +29,8 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/navsidebar.js',
-    '~/plugins/md.js'
+    '~/plugins/md.js',
+    '~/plugins/rain.js'
   ],
   target: 'server',
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -38,6 +39,7 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
   ],
+  loading: '~/components/Loading.vue',
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [

@@ -2,6 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Krona+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
 @font-face {
    font-family: 'neoneon';
    src: url("../font/Neoneon/Neoneon.otf") format('otf');
@@ -200,4 +202,17 @@ body {
 html {
   background: #2C2F33;
 }
-
+canvas {
+  filter: blur(1px);
+}
+@keyframes fadein {
+  from {
+    opacity:0;
+  }
+  to {
+    opacity:1;
+  }
+}
+.topRight {
+  position: absolute; top: 5px; right: 5px; text-align: right;
+}
