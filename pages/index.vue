@@ -2,15 +2,12 @@
 
 <template>
   <div id="home">
-    <div class="message-container">
-      <p>Welcome</p>
-    </div>
     <div class="profile-container">
-      <img src="https://brys.tk/pfp.png" alt="profile picture" class="center"/>
+      <img src="https://brys.tk/pfp.png" alt="profile picture" class="center" id="pfp-img"/>
     </div>
-    <div class="bio-container">
+      <div id="bio-wrapper">
       <p id="bio">Hi, I'm Brys, the creator of this site!<br> This site was based off of: <br><a href="https://vuejs.org/"> <i class="fab fa-vuejs" id="vue"/></a> with <a href="https://nuxtjs.org/" id="nuxt">Nuxt JS</a> providing the Web Framework.<br></p>
-      <p id="socials" style="letter-spacing: 10px;"><a href="https://github.com/brys0"><i class="fab fa-github fa-2x social" style="color: #fff; text-align: center;" id="social"></i></a><a href="https://discord.com/users/443166863996878878"><i class="fab fa-discord fa-2x social" style="color: #7289DA; text-align: center;"></i></a></p>
+      <p id="socials" style="letter-spacing: 20px;"><a href="https://github.com/brys0"><i class="fab fa-github fa-2x social" style="color: #fff; margin-left: 15px" id="social"></i></a><a href="https://discord.com/users/443166863996878878"><i class="fab fa-discord fa-2x social" style="color: #7289DA; "/></a></p>
     </div>
   </div>
 </template>
@@ -29,20 +26,7 @@ export default {
 <style>
 
 
-.message-container {
-  font-family: 'Bebas Neue', cursive;
-  width: 5em;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-  font-size: 5em;
-  animation:  dropInMessage 1s ease forwards, shine 5s linear infinite;
-  background: linear-gradient(to right, var(--error-text) 20%, #30b0ff 40%, #30b0ff 60%, var(--error-text) 80%);
-  background-size: 200% auto;
-  color: var(--error-text);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+
 .profile-container {
   object-position: center;
 }
@@ -56,11 +40,32 @@ export default {
   width: calc(50vh / 2);
 }
 #bio {
-  padding-left: 3vh;
+  max-width: 20vw;
+  padding: 10px;
   font-family: 'Itim', cursive;
   font-size: calc(4vh / 2);
   color: #d0c1e0;
   animation: fadeIn ease-in-out 2.2s;
+  background: #3d3d3d;
+  margin: 0px auto;
+  border-radius: 15px;
+  border: #42b883 solid 4px;
+  margin-top: 5vh;
+  text-align: center;
+}
+#socials {
+  max-width: fit-content;
+  padding: 20px;
+  font-family: 'Itim', cursive;
+  font-size: calc(4vh / 2);
+  color: #d0c1e0;
+  animation: fadeIn ease-in-out 2.2s;
+  background: #3d3d3d;
+  margin: 0px auto;
+  border-radius: 15px;
+  border: #42b883 solid 4px;
+  margin-top: 5vh;
+  text-align: center;
 }
 #vue {
   color: #42b883;
@@ -79,15 +84,18 @@ export default {
   color: #30b0ff;
 }
 img {
-  animation: fadeIn ease-in-out 2s;
+  animation: fadeIn ease-in-out 2s, shine 1s linear infinite;;
+  border-radius: 50%;
+}
+#pfp-img {
+  margin-top: 20vh;
+  background: linear-gradient(to right, #3498db 20%, #7d59ff 40%, #42b883 60%, #3498db 80%);
+  padding: 10px;
+  background-size: 200% auto;
 }
 @keyframes dropInMessage {
   from {transform: translateY(-18vh);}
   to {transform: translateY(-2vh);}
-}
-@keyframes popInNav {
-  from {transform: translateX(-20vh);}
-  to {transform: translateX(0);}
 }
 @keyframes shine {
   to {

@@ -162,7 +162,7 @@ export default {
 }
 
 .header {
-  width: 20em;
+  width: 35vw;
   color: #486ba3;
   background-color: var(--dark-box);
   border-radius: 15px;
@@ -176,7 +176,7 @@ export default {
   transform: translateY(6vh);;
 }
 .box {
-  width: 50vh;
+  width: 35vw;
   padding: 40px;
   position: absolute;
   top: 50%;
@@ -199,22 +199,23 @@ export default {
   text-align: center;
   border: 2px solid #3498db;
   padding: 14px 10px;
-  width: 200px;
+  width: 15vw;
   outline: none;
   color: white;
   border-radius: 24px;
   transition: 0.25s;
+
 }
 .box input[type = "text"]:focus,.box input[type = "email"]:focus{
   width: 280px;
   border-color: #2ecc71;
 }
 textarea {
-  width: 200px;
+  width: 15vw;
   text-align: left;
   background: #3d3d3d;
   color: #fff;
-  max-width: 45vh;
+  max-width: 45vw;
   max-height: 25vh;
   resize: none;
   border: 2px solid #3498db;
@@ -238,6 +239,7 @@ textarea:focus {
   border-radius: 24px;
   transition: 0.25s;
   cursor: pointer;
+  width: 15vw;
 }
 .box input[type = "submit"]:hover{
   background: #2ecc71;
@@ -336,7 +338,7 @@ input:checked + .slider:before {
   color: #ffffff;
   font-family: Ubuntu, sans-serif;
   font-size: 16px;
-  width: 50vh;
+  width: 35vw;
   height: 25vh;
   overflow-y: scroll;
   text-align: left;
@@ -344,6 +346,24 @@ input:checked + .slider:before {
 pre[class*="language-"] {
   background-color: #2e2d2d;
 }
-
+@media only screen and (max-width: 600px) {
+  #submit {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  #md-id {
+    width: 30vw;
+  }
+  .box {
+    margin-top: 15vh;
+  }
+  .header {
+    font-size: 15px;
+  }
+  .box input[type = "text"]:focus,.box input[type = "email"]:focus{
+    width: 15vw;
+    border-color: #2ecc71;
+  }
+}
 
 </style>

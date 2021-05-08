@@ -95,6 +95,7 @@ export default {
   font-family: Ubuntu, sans-serif;
   animation: popInNav 0.5s ease forwards;
   border-radius: 5px;
+  z-index: 0;
 }
 .v-sidebar-menu .vsm--item {
   font-weight: normal;
@@ -110,6 +111,15 @@ export default {
 #🌧️:hover {
   font-size: 75px;
   cursor: pointer;
+}
+@keyframes popInNav {
+  from {transform: translateX(-20vw);}
+  to {transform: translateX(0);}
+}
+@media only screen and (max-width: 600px) {
+  #🌧️ {
+    font-size: 35px;
+  }
 }
 
 </style>
