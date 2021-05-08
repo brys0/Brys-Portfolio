@@ -24,7 +24,7 @@ export default {
           return new RainyDay(options)
         }
 
-        var src =
+        let src =
           typeof options.image === 'string'
             ? document.getElementById(options.image)
             : options.image
@@ -34,11 +34,11 @@ export default {
           this.img = src
           this.initialize(options)
         } else {
-          var self = this
-          var style = src.currentStyle || window.getComputedStyle(src, false),
+          let self = this
+          let style = src.currentStyle || window.getComputedStyle(src, false),
             bi = style.backgroundImage.slice(4, -1).replace(/"/g, '')
 
-          var imgTemp = document.createElement('img')
+          let imgTemp = document.createElement('img')
           imgTemp.onload = function () {
             self.imgSource = src
             self.img = this
@@ -71,24 +71,24 @@ export default {
        */
 
       RainyDay.prototype.initialize = function (options) {
-        var sourceParent =
+        let sourceParent =
           this.imgSource ||
           options.parentElement ||
           document.getElementsByTagName('body')[0]
-        var parentOffset = window.getOffset(sourceParent)
+        let parentOffset = window.getOffset(sourceParent)
 
         this.imgDownscaled = this.customDrop || downscaleImage(this.img, 50)
         if (options.sound) {
           playSound(options.sound)
         }
 
-        var defaults = {
+        let defaults = {
           opacity: 1,
           blur: 10,
           crop: [0, 0, this.img.naturalWidth, this.img.naturalHeight],
           enableSizeChange: true,
           parentElement: sourceParent,
-          fps: 144,
+          fps: 30,
           fillStyle: '#8ED6FF',
           enableCollisions: true,
           gravityThreshold: 3,
@@ -105,7 +105,7 @@ export default {
         }
 
         // add the defaults to options
-        for (var option in defaults) {
+        for (let option in defaults) {
           if (typeof options[option] === 'undefined') {
             options[option] = defaults[option]
           }
@@ -137,8 +137,8 @@ export default {
        * @returns HTMLElement the canvas
        */
       RainyDay.prototype.prepareCanvas = function () {
-        var canvas = document.createElement('canvas')
-        var {position, top, left, width, height} = this.options
+        let canvas = document.createElement('canvas')
+        let {position, top, left, width, height} = this.options
         canvas.style.position = position
         canvas.style.top = top
         canvas.style.left = left
@@ -186,21 +186,21 @@ export default {
        * Periodically check the size of the underlying element
        */
       RainyDay.prototype.checkSize = function () {
-        var {width, height, offsetLeft, offsetTop} = this.canvas
+        let {width, height, offsetLeft, offsetTop} = this.canvas
 
-        var source = this.options.parentElement.getBoundingClientRect()
-        var sourceWidth = source.width
-        var sourceHeight = source.bottom - source.top
+        let source = this.options.parentElement.getBoundingClientRect()
+        let sourceWidth = source.width
+        let sourceHeight = source.bottom - source.top
 
-        var clientWidth = sourceWidth
-        var clientHeight = sourceHeight
-        var clientOffsetLeft = source.left
-        var clientOffsetTop = source.top
+        let clientWidth = sourceWidth
+        let clientHeight = sourceHeight
+        let clientOffsetLeft = source.left
+        let clientOffsetTop = source.top
 
-        var canvasWidth = width
-        var canvasHeight = height
-        var canvasOffsetLeft = offsetLeft
-        var canvasOffsetTop = offsetTop
+        let canvasWidth = width
+        let canvasHeight = height
+        let canvasOffsetLeft = offsetLeft
+        let canvasOffsetTop = offsetTop
 
         if (this.options.parentElement.style.zIndex) {
           this.canvas.style.zIndex = this.options.parentElement.style.zIndex
@@ -232,9 +232,9 @@ export default {
           this.addDropCallback()
         }
         // |this.drops| array may be changed as we iterate over drops
-        var dropsClone = this.drops.slice()
-        var newDrops = []
-        for (var i = 0; i < dropsClone.length; ++i) {
+        let dropsClone = this.drops.slice()
+        let newDrops = []
+        for (let i = 0; i < dropsClone.length; ++i) {
           if (dropsClone[i].animate()) {
             newDrops.push(dropsClone[i])
           }
@@ -255,7 +255,7 @@ export default {
        * Polyfill for requestAnimationFrame
        */
       RainyDay.prototype.setRequestAnimFrame = function () {
-        var fps = this.options.fps
+        let fps = this.options.fps
         window.requestAnimFrame = (function () {
           return (
             window.requestAnimationFrame ||
@@ -280,7 +280,7 @@ export default {
         this.reflected.height = Math.floor(
           this.canvas.height / this.options.reflectionScaledownFactor
         )
-        var ctx = this.reflected.getContext('2d')
+        let ctx = this.reflected.getContext('2d')
         ctx.drawImage(
           this.imgDownscaled,
           0,
@@ -329,8 +329,8 @@ export default {
         // prepare gravity matrix
         if (this.options.enableCollisions) {
           // calculate max radius of a drop to establish gravity matrix resolution
-          var maxDropRadius = 0
-          for (var i = 0; i < presets.length; i++) {
+          let maxDropRadius = 0
+          for (let i = 0; i < presets.length; i++) {
             if (presets[i][0] + presets[i][1] > maxDropRadius) {
               maxDropRadius = Math.floor(presets[i][0] + presets[i][1])
             }
@@ -338,28 +338,28 @@ export default {
 
           if (maxDropRadius > 0) {
             // initialize the gravity matrix
-            var mwi = Math.ceil(this.canvas.width / maxDropRadius)
-            var mhi = Math.ceil(this.canvas.height / maxDropRadius)
+            let mwi = Math.ceil(this.canvas.width / maxDropRadius)
+            let mhi = Math.ceil(this.canvas.height / maxDropRadius)
             this.matrix = new CollisionMatrix(mwi, mhi, maxDropRadius)
           } else {
             this.options.enableCollisions = false
           }
         }
 
-        for (var i = 0; i < presets.length; i++) {
+        for (let i = 0; i < presets.length; i++) {
           if (!presets[i][3]) {
             presets[i][3] = -1
           }
         }
 
-        var lastExecutionTime = 0
+        let lastExecutionTime = 0
         this.addDropCallback = function () {
-          var timestamp = new Date().getTime()
+          let timestamp = new Date().getTime()
           if (timestamp - lastExecutionTime < speed) {
             return
           }
           lastExecutionTime = timestamp
-          var context = this.canvas.getContext('2d')
+          let context = this.canvas.getContext('2d')
           context.clearRect(0, 0, this.canvas.width, this.canvas.height)
           context.drawImage(
             this.background,
@@ -369,12 +369,12 @@ export default {
             this.canvas.height
           )
           // select matching preset
-          var preset
-          for (var i = 0; i < presets.length; i++) {
+          let preset
+          for (let i = 0; i < presets.length; i++) {
             if (presets[i][2] > 1 || presets[i][3] === -1) {
               if (presets[i][3] !== 0) {
                 presets[i][3]--
-                for (var y = 0; y < presets[i][2]; ++y) {
+                for (let y = 0; y < presets[i][2]; ++y) {
                   this.putDrop(
                     new Drop(
                       this,
@@ -430,9 +430,9 @@ export default {
        * result if true animation of this drop should be stopped
        */
       RainyDay.prototype.clearDrop = function (drop, force) {
-        var result = drop.clear(force)
+        let result = drop.clear(force)
         if (result) {
-          var index = this.drops.indexOf(drop)
+          let index = this.drops.indexOf(drop)
           if (index >= 0) {
             this.drops.splice(index, 1)
           }
@@ -465,20 +465,20 @@ export default {
         this.context.save()
         this.context.beginPath()
 
-        var orgR = this.r
+        let orgR = this.r
         this.r = Math.floor(0.95 * this.r)
         if (this.r < 3) {
           this.context.arc(this.x, this.y, this.r, 0, Math.PI * 2, true)
           this.context.closePath()
         } else if (this.colliding || this.yspeed > 2) {
           if (this.colliding) {
-            var collider = this.colliding
+            let collider = this.colliding
             this.r = 1.001 * (this.r > collider.r ? this.r : collider.r)
             this.x += collider.x - this.x
             this.colliding = null
           }
 
-          var yr = 1 + 0.1 * this.yspeed
+          let yr = 1 + 0.1 * this.yspeed
           this.context.moveTo(this.x - this.r / yr, this.y)
           this.context.bezierCurveTo(
             this.x - this.r,
@@ -549,12 +549,12 @@ export default {
           return false
         }
 
-        var stopped = this.rainyday.gravity(this)
+        let stopped = this.rainyday.gravity(this)
         if (!stopped && this.rainyday.trail) {
           this.rainyday.trail(this)
         }
         if (this.rainyday.options.enableCollisions) {
-          var collisions = this.rainyday.matrix.update(this, stopped)
+          let collisions = this.rainyday.matrix.update(this, stopped)
           if (collisions) {
             this.rainyday.collision(this, collisions)
           }
@@ -593,8 +593,8 @@ export default {
        * @param drop raindrop object
        */
       RainyDay.prototype.TRAIL_SMUDGE = function (drop) {
-        var y = drop.y - drop.r - 3
-        var x = drop.x - Math.floor(drop.r / 2) + Math.random() * 2
+        let y = drop.y - drop.r - 3
+        let x = drop.x - Math.floor(drop.r / 2) + Math.random() * 2
         if (y < 0 || x < 0) {
           return
         }
@@ -696,7 +696,7 @@ export default {
        * @param val2 second number
        */
       RainyDay.prototype.positiveMin = function (val1, val2) {
-        var result = 0
+        let result = 0
         if (val1 < val2) {
           if (val1 <= 0) {
             result = val2
@@ -727,31 +727,31 @@ export default {
        */
 
       RainyDay.prototype.REFLECTION_MINIATURE = function (drop) {
-        var sx = Math.max(
+        let sx = Math.max(
           (drop.x - this.options.reflectionDropMappingWidth) /
           this.options.reflectionScaledownFactor,
           0
         )
-        var sy = Math.max(
+        let sy = Math.max(
           (drop.y - this.options.reflectionDropMappingHeight) /
           this.options.reflectionScaledownFactor,
           0
         )
 
-        var sw = this.positiveMin(
+        let sw = this.positiveMin(
           this.options.reflectionDropMappingWidth *
           2 /
           this.options.reflectionScaledownFactor,
           this.reflected.width - sx
         )
-        var sh = this.positiveMin(
+        let sh = this.positiveMin(
           this.options.reflectionDropMappingHeight *
           2 /
           this.options.reflectionScaledownFactor,
           this.reflected.height - sy
         )
-        var dx = Math.max(drop.x - 1.1 * drop.r, 0)
-        var dy = Math.max(drop.y - 1.1 * drop.r, 0)
+        let dx = Math.max(drop.x - 1.1 * drop.r, 0)
+        let dy = Math.max(drop.y - 1.1 * drop.r, 0)
         this.context.drawImage(
           this.reflected,
           Math.floor(sx),
@@ -771,13 +771,13 @@ export default {
        * @param collisions list of potential collisions
        */
       RainyDay.prototype.COLLISION_SIMPLE = function (drop, collisions) {
-        var item = collisions
-        var drop2
+        let item = collisions
+        let drop2
         while (item != null) {
-          var p = item.drop
-          var radiusSum = drop.r + p.r
-          var dx = drop.x - p.x
-          var dy = drop.y - p.y
+          let p = item.drop
+          let radiusSum = drop.r + p.r
+          let dx = drop.x - p.x
+          let dy = drop.y - p.y
           if (Math.abs(dx) < radiusSum) {
             if (Math.abs(dy) < radiusSum) {
               if (
@@ -797,7 +797,7 @@ export default {
         }
 
         // rename so that we're dealing with low/high drops
-        var higher, lower
+        let higher, lower
         if (drop.y > drop2.y) {
           higher = drop
           lower = drop2
@@ -829,7 +829,7 @@ export default {
         this.clearbackground.width = this.canvas.width
         this.clearbackground.height = this.canvas.height
 
-        var context = this.background.getContext('2d')
+        let context = this.background.getContext('2d')
         // context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         context.drawImage(
@@ -874,7 +874,7 @@ export default {
        * @param radius blur radius
        */
       RainyDay.prototype.stackBlurCanvasRGB = function (width, height, radius) {
-        var shgTable = [
+        let shgTable = [
           [0, 9],
           [1, 11],
           [2, 12],
@@ -892,7 +892,7 @@ export default {
           [181, 24]
         ]
 
-        var mulTable = [
+        let mulTable = [
           512,
           512,
           456,
@@ -1152,10 +1152,10 @@ export default {
 
         radius |= 0
 
-        var context = this.background.getContext('2d')
-        var imageData = context.getImageData(0, 0, width, height)
-        var pixels = imageData.data
-        var x,
+        let context = this.background.getContext('2d')
+        let imageData = context.getImageData(0, 0, width, height)
+        let pixels = imageData.data
+        let x,
           y,
           i,
           p,
@@ -1175,12 +1175,12 @@ export default {
           pg,
           pb,
           rbs
-        var radiusPlus1 = radius + 1
-        var sumFactor = radiusPlus1 * (radiusPlus1 + 1) / 2
+        let radiusPlus1 = radius + 1
+        let sumFactor = radiusPlus1 * (radiusPlus1 + 1) / 2
 
-        var stackStart = new BlurStack()
-        var stackEnd = new BlurStack()
-        var stack = stackStart
+        let stackStart = new BlurStack()
+        let stackEnd = new BlurStack()
+        let stack = stackStart
         for (i = 1; i < 2 * radius + 1; i++) {
           stack = stack.next = new BlurStack()
           if (i === radiusPlus1) {
@@ -1188,14 +1188,14 @@ export default {
           }
         }
         stack.next = stackStart
-        var stackIn = null
-        var stackOut = null
+        let stackIn = null
+        let stackOut = null
 
         yw = yi = 0
 
-        var mulSum = mulTable[radius]
-        var shgSum
-        for (var ssi = 0; ssi < shgTable.length; ++ssi) {
+        let mulSum = mulTable[radius]
+        let shgSum
+        for (let ssi = 0; ssi < shgTable.length; ++ssi) {
           if (radius <= shgTable[ssi][0]) {
             shgSum = shgTable[ssi - 1][1]
             break
@@ -1382,9 +1382,9 @@ export default {
         this.xc = x
         this.yc = y
         this.matrix = new Array(x)
-        for (var i = 0; i <= x + 5; i++) {
+        for (let i = 0; i <= x + 5; i++) {
           this.matrix[i] = new Array(y)
-          for (var j = 0; j <= y + 5; ++j) {
+          for (let j = 0; j <= y + 5; ++j) {
             this.matrix[i][j] = new DropItem(null)
           }
         }
@@ -1413,7 +1413,7 @@ export default {
           }
           this.matrix[drop.gmx][drop.gmy].add(drop)
 
-          var collisions = this.collisions(drop)
+          let collisions = this.collisions(drop)
           if (collisions && collisions.next != null) {
             return collisions.next
           }
@@ -1438,8 +1438,8 @@ export default {
        * @returns DropItem list of drops that collide with it
        */
       CollisionMatrix.prototype.collisions = function (drop) {
-        var item = new DropItem(null)
-        var first = item
+        let item = new DropItem(null)
+        let first = item
 
         item = this.addAll(item, drop.gmx - 1, drop.gmy + 1)
         item = this.addAll(item, drop.gmx, drop.gmy + 1)
@@ -1457,7 +1457,7 @@ export default {
        */
       CollisionMatrix.prototype.addAll = function (to, x, y) {
         if (x > 0 && y > 0 && x < this.xc && y < this.yc) {
-          var items = this.matrix[x][y]
+          let items = this.matrix[x][y]
           while (items.next != null) {
             items = items.next
             to.next = new DropItem(items.drop)
@@ -1488,7 +1488,7 @@ export default {
        * @param drop raindrop to be added
        */
       DropItem.prototype.add = function (drop) {
-        var item = this
+        let item = this
         while (item.next != null) {
           item = item.next
         }
@@ -1500,8 +1500,8 @@ export default {
        * @param drop raindrop to be removed
        */
       DropItem.prototype.remove = function (drop) {
-        var item = this
-        var prevItem = null
+        let item = this
+        let prevItem = null
         while (item.next != null) {
           prevItem = item
           item = item.next
@@ -1520,7 +1520,7 @@ export default {
           element = document.getElementById(element)
         }
 
-        var doc,
+        let doc,
           docElem,
           rect,
           win,
@@ -1557,8 +1557,8 @@ export default {
        * Image downscale
        */
       function downscaleImage(img, width) {
-        var cv = document.createElement('canvas')
-        var ctx = cv.getContext('2d')
+        let cv = document.createElement('canvas')
+        let ctx = cv.getContext('2d')
         cv.width = width || 50
         cv.height = cv.width * img.height / img.width
         ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, cv.width, cv.height)
@@ -1570,7 +1570,7 @@ export default {
        */
 
       function playSound(url) {
-        var audio = new Audio(url)
+        let audio = new Audio(url)
         audio.loop = true
         audio.volume = 0.25
         audio.play()

@@ -18,7 +18,10 @@ export default {
       rain.title = "Rain is not being generated";
       rain.innerText = "☁️";
     }
-    console.log('%c Brys \n\n%c Welcome to my site, If you want to snoop around in dev tools to see how I made this I suggest you look at the un-compiled code here https://github.com/brys0/Brys-Portfolio\n %c Thank you to my Friends and GF for helping me make this ❤️', 'font-weight: bold; font-size: 50px;color: red; text-shadow: 3px 3px 0 rgb(217,31,38) , 6px 6px 0 rgb(226,91,14) , 9px 9px 0 rgb(245,221,8) , 12px 12px 0 rgb(5,148,68) , 15px 15px 0 rgb(2,135,206) , 18px 18px 0 rgb(4,77,145) , 21px 21px 0 rgb(42,21,113)', 'color: #42b883; font-family: \'Itim\', cursive; font-size: 16px;', 'font-style: italic; font-weight: bold; font-family: Ubuntu, sans-serif;');
+    console.log('%c Brys\n%c Welcome to my site, If you want to snoop around in dev tools to see how I made this I suggest you look at the un-compiled code here https://github.com/brys0/Brys-Portfolio\n %c Thank you ❤️',
+      'font-weight: bold; font-size: 50px;color: red; text-shadow: 3px 3px 0 rgb(217,31,38) , 6px 6px 0 rgb(226,91,14) , 9px 9px 0 rgb(245,221,8) , 12px 12px 0 rgb(5,148,68) , 15px 15px 0 rgb(2,135,206) , 18px 18px 0 rgb(4,77,145) , 21px 21px 0 rgb(42,21,113)',
+      'color: #42b883; font-family: \'Itim\', cursive; font-size: 16px;',
+      'font-style: italic; font-weight: bold; font-family: Ubuntu, sans-serif;');
       this.$nextTick(() => {
         this.$nuxt.$loading.start()
         window.onload = () => {

@@ -18,6 +18,7 @@
     "circular-json": "^0.5.9",
     "core-js": "^3.9.1",
     "devtools-detect": "^3.0.1",
+    "jellyfin-apiclient": "^1.8.0",
     "nuxt": "^2.15.3",
     "nuxt-fontawesome": "^0.4.0",
     "rainyday.js": "^0.1.7",

@@ -10,7 +10,7 @@
     </div>
     <div class="bio-container">
       <p id="bio">Hi, I'm Brys, the creator of this site!<br> This site was based off of: <br><a href="https://vuejs.org/"> <i class="fab fa-vuejs" id="vue"/></a> with <a href="https://nuxtjs.org/" id="nuxt">Nuxt JS</a> providing the Web Framework.<br></p>
-      <p id="socials" style="letter-spacing: 10px;"><a href="https://github.com/brys0"><i class="fab fa-github fa-2x" style="color: #fff; text-align: center;"></i></a><a href="https://discord.com/users/443166863996878878"><i class="fab fa-discord fa-2x img-link" style="color: #7289DA; text-align: center;"></i></a></p>
+      <p id="socials" style="letter-spacing: 10px;"><a href="https://github.com/brys0"><i class="fab fa-github fa-2x social" style="color: #fff; text-align: center;" id="social"></i></a><a href="https://discord.com/users/443166863996878878"><i class="fab fa-discord fa-2x social" style="color: #7289DA; text-align: center;"></i></a></p>
     </div>
   </div>
 </template>
@@ -42,7 +42,6 @@ export default {
   color: var(--error-text);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  backdrop-filter: blur(8px);
 }
 .profile-container {
   object-position: center;
@@ -100,10 +99,10 @@ img {
   vertical-align: middle
 }
 
-.img-link {
+.social {
   transition: fill 200ms ease-out;
 }
-.img-link:hover {
+.social:hover {
   fill: #30b0ff
 }
 
